@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Sito per obiettivi e pensieri</title>
+   <link rel="stylesheet" href="./index-style.css">
+</head>
+<body>
+   <header>
+       <nav id="Navigazione-pagina" aria-label="Navigazione principale">
+           <ul>
+              <li><a href="#home" aria-current="page">Pagina Principale</a></li>
+              <li><a href="./Pensieri.html" onclick="toggleSection('pensieri')">I Miei Pensieri</a></li>
+              <li><a href="#obiettivi" onclick="toggleSection('obiettivi')">I Miei Obiettivi</a></li>
+           </ul>
+       </nav>
+   </header>
+
+   <main>
+       <section id="Sezione-principale" aria-labelledby="dashboard-title">
+           <div class="Contenitore-1">
+               <h1 id="dashboard-title">Dashboard personale di Francesco</h1>
+               <h2>Pagina che serve a strutturare i miei pensieri e la mia giornata</h2>
+           </div>
+
+           <div class="Contenitore-2">
+               <p>Cosa mi frulla per la testa oggi?</p>
+               <button type="button" onclick="toggleSection('pensieri')" aria-expanded="false" aria-controls="pensieri">Vedi i miei pensieri</button>
+           </div>
+
+           <!-- Sezione Pensieri -->
+           <div id="pensieri" class="Contenitore-2" style="display: none;">
+               <h3>I miei pensieri</h3>
+               <ul>
+                   <li>Oggi voglio concentrarmi su un nuovo progetto.</li>
+                   <li>Riflettere su come migliorare la mia routine mattutina.</li>
+               </ul>
+               <form id="aggiungi-pensiero" aria-label="Aggiungi un nuovo pensiero">
+                   <label for="nuovo-pensiero">Nuovo pensiero:</label>
+                   <input type="text" id="nuovo-pensiero" name="pensiero" required>
+                   <button type="submit">Aggiungi</button>
+               </form>
+           </div>
+
+           <div class="Assistente-AI">
+               <h2>Qui scelgo l' assitente AI per vedere i miei progressi : </h2>
+               <ol>
+                  <li><a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer">Gemini</a></li>
+                  <li><a href="http://grok.com" target="_blank" rel="noopener noreferrer">Grok</a></li>
+               </ol>
+           </div>
+       </section>
+
+       <section id="Sezione-2" aria-labelledby="obiettivi-title">
+           <div class="Contenitore-3">
+               <h2 id="obiettivi-title">Quali sono i miei obiettivi invece?</h2>
+               <h3>Controlla i miei obiettivi qui:</h3>
+               <button type="button" onclick="toggleSection('obiettivi')" aria-expanded="false" aria-controls="obiettivi">Vedi i miei obiettivi</button>
+
+               <!-- Sezione Obiettivi -->
+               <div id="obiettivi" style="display: none;">
+                   <ul>
+                       <li>Completare il progetto web entro fine mese.</li>
+                       <li>Leggere un libro sulla produttività.</li>
+                   </ul>
+               </div>
+           </div>
+       </section>
+   </main>
+
+   <script>
+       function toggleSection(sectionId) {
+           const section = document.getElementById(sectionId);
+           const button = document.querySelector(`button[aria-controls="${sectionId}"]`);
+           const isHidden = section.style.display === 'none' || section.style.display === '';
+           section.style.display = isHidden ? 'block' : 'none';
+           button.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+       }
+
+       document.getElementById('aggiungi-pensiero').addEventListener('submit', function(e) {
+           e.preventDefault();
+           const input = document.getElementById('nuovo-pensiero');
+           const pensiero = input.value.trim();
+           if (pensiero) {
+               const li = document.createElement('li');
+               li.textContent = pensiero;
+               document.querySelector('#pensieri ul').appendChild(li);
+               input.value = '';
+           }
+       });
+   </script>
+   
+   <footer>
+       <p>© 2025 Francesco Gattavecchia</p>
+   </footer>
+</body>
+</html>
